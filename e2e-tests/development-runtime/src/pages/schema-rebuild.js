@@ -18,7 +18,7 @@ export const schemaRebuildQuery = graphql`
         node {
           frontmatter {
             title
-            foo
+            # foo
           }
         }
       }
