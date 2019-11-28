@@ -27,12 +27,17 @@ describe(`on new file`, () => {
 })
 
 describe(`on schema change`, () => {
-  beforeEach(() => {
+  before(() => {
     const content = JSON.stringify(FILE_CONTENT)
     cy.exec(
       `npm run update -- --file content/sample.md --file-content \\"${content}\\"`
     )
     cy.visit(`/`).waitForRouteChange()
+  })
+  after(() => {
+    cy.exec(
+      `npm run update -- --file src/pages/schema-rebuild.js --exact --replacements "foo:# foo"`
+    )
   })
 
   it(`rebuilds GraphQL schema`, () => {
